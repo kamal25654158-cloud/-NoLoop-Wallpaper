@@ -1,9 +1,11 @@
+
 name: Build NoLoop Wallpaper
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
@@ -23,10 +25,10 @@ jobs:
           java-version: "17"
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
       - name: Install Android platform
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+        run: sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -41,3 +43,4 @@ jobs:
         with:
           name: NoLoopWallpaper-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          
